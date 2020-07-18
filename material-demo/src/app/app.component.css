@@ -1,0 +1,29 @@
+button {
+    margin-right: 5rem;
+    background-color: burlywood;
+}
+div {
+    margin: 1rem;
+}
+
+.navbar {
+    justify-content:  space-between;
+}
+
+span#navbar1 {
+    padding-right: 1rem;
+    color:blue;
+}
+
+mat-sidenav-container {
+    height: 10%;
+}
+
+mat-sidenav, mat-sidenav-content {
+    padding:16px;
+}
+
+mat-sidenav {
+    background-color: lightcoral;
+    width: 200px;
+}
