@@ -1,6 +1,236 @@
+
+
+<button mat-raised-button (click)="openDialog()">Open Dialog</button>
+
+<button mat-raised-button matTooltip="Welcome to CodeEvolution" 
+            matTooltipPosition="after" matTooltipShowDelay="2000"
+             matTooltipHideDelay="2000">Hello</button>
+<button mat-button (click)="openSnackBar('Item deleted','Dismiss')">
+Show Snack-Bar 1
+</button>
+<button mat-button (click)="openSnackBar2('Item deleted','Undo')">
+    Show Snack-Bar 2
+    </button>
+<button mat-button (click)="openCustomSnackBar()"> Show custom snackbar</button>
+<mat-form-field>
+    <input matInput [matDatepicker]="myDatePicker" [min]="minDate" [max]="maxDate" >
+    <mat-datepicker matSuffix></mat-datepicker>
+    <mat-datepicker #myDatePicker startView="year"></mat-datepicker>
+</mat-form-field>
+
+<mat-form-field>
+    <input matInput [matDatepicker]="myDatePicker" [matDatepickerFilter]="dateFilter">
+    <mat-datepicker-toggle [for]="myDatePicker" matSuffix></mat-datepicker-toggle>
+    <mat-datepicker #myDatePicker startView="year"></mat-datepicker>
+</mat-form-field>
+
+<mat-radio-group>
+    <mat-radio-button value="angular" color="primary" >Angular</mat-radio-button>
+    <mat-radio-button value="react">React</mat-radio-button>
+    <mat-radio-button value="vue" color="warn">Vue</mat-radio-button>
+</mat-radio-group><br/>
+
+<mat-checkbox>
+    Subscribe1
+</mat-checkbox><br/>
+<mat-checkbox labelPosition="before">
+    Subscribe2
+</mat-checkbox><br/>
+<mat-checkbox color="primary">
+    Subscribe3
+</mat-checkbox><br/>
+<mat-checkbox color="warn">
+    Subscribe4
+</mat-checkbox>
+
+<form>
+    <mat-form-field>
+        <input type="text" matInput [matAutocomplete]="auto1"/>
+        <mat-autocomplete #auto1="matAutocomplete" >
+            <mat-option *ngFor="let option of options" [value]="option">
+                {{option}}
+            </mat-option>
+            </mat-autocomplete>  
+    </mat-form-field>
+</form>
+
+<form>
+<mat-form-field>
+    <input type="text" matInput [matAutocomplete]="auto2"/>
+    <mat-autocomplete #auto2="matAutocomplete" [displayWith]="displayFn">
+        <mat-option *ngFor="let option of objectOptions" [value]="option">
+            {{option.name}}
+        </mat-option>
+        </mat-autocomplete>  
+</mat-form-field>
+</form>
+
+<form>
+    <mat-form-field>
+        <input type="text" matInput [matAutocomplete]="auto3" [formControl]="myControl"/>
+        <mat-autocomplete #auto3="matAutocomplete" [displayWith]="displayFn">
+            <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                {{option}}
+            </mat-option>
+            </mat-autocomplete>  
+    </mat-form-field>
+ </form>
+
+<mat-form-field>
+    <mat-label>Topic</mat-label>
+    <mat-select [(value)]="selectedValue" multiple>
+        <mat-option>None</mat-option>
+            <mat-optgroup label="Web">
+                <mat-option value="angular">Angular</mat-option>
+                <mat-option value="react">React</mat-option>
+                <mat-option value="vue">Vue</mat-option>
+            </mat-optgroup> 
+            <mat-optgroup label="Mobile">
+                <mat-option value="ionic">I onic</mat-option>
+                <mat-option value="reactnative">React native</mat-option>
+            </mat-optgroup> 
+    </mat-select>
+</mat-form-field>
+{{selectedValue}}
+
+<mat-form-field floatLabel="auto" hideRequiredMarker appearance="fill" color="accent">
+    <mat-label >Name</mat-label>
+    <input matInput required >
+    <mat-hint align="end">Min 5 Characters</mat-hint> 
+</mat-form-field>
+
+<mat-form-field floatLabel="auto" hideRequiredMarker appearance="outline" color="warn">
+    <mat-label >Name</mat-label>
+    <input matInput required >
+    <mat-hint align="end">Min 5 Characters</mat-hint> 
+</mat-form-field>
+
+<mat-horizontal-stepper linear>
+    <mat-step label="Shipping Addresss" completed=true>
+        <p>Shipping Address Details</p>
+    </mat-step>
+    <mat-step label="Billing Address"completed=false optional>
+        <p>Billing Address Details</p>
+        <div>s
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button matStepperNext>Next</button>
+        </div>
+    </mat-step>
+    <mat-step label="Place Order" completed=false>
+        <p>Order Details</p>
+    </mat-step>
+</mat-horizontal-stepper>
+<mat-tab-group [backgroundColor]="background" #tabRef (selectedTabChange)="logChange(tabRef.selectedIndex)">
+    <mat-tab label="Angular"  >Angular Content</mat-tab>
+    <mat-tab label="React">React Content</mat-tab>
+    <mat-tab label="Vue">Vue Content</mat-tab>
+</mat-tab-group>
+{{tabRef.selectedIndex}}
+<br/>
+<mat-card>
+    <mat-card-title>
+        Card Title
+    </mat-card-title>
+    <mat-card-content>
+        This Is the Card Content 
+    </mat-card-content>
+    <mat-card-actions align="end">
+        <button mat-flat-button>Login</button>
+    </mat-card-actions>
+</mat-card>
+<br/>
+<mat-accordion multi="true" hideToggle>
+<mat-expansion-panel>
+    <mat-expansion-panel-header>
+        <mat-panel-title>
+            Angular Fundamentals
+        </mat-panel-title>
+        <mat-panel-description>
+            Total Duration: 3 hours
+        </mat-panel-description>
+    </mat-expansion-panel-header>
+    <p>This is the panel content. Add course details.</p>
+    <mat-action-row>
+        <button mat-button>Enroll</button>
+    </mat-action-row>
+</mat-expansion-panel>
+
+<mat-expansion-panel>
+    <mat-expansion-panel-header>
+        <mat-panel-title>
+            Angular Material
+        </mat-panel-title>
+        <mat-panel-description>
+            Total Duration: 2 hours
+        </mat-panel-description>
+    </mat-expansion-panel-header>
+    <p>This is the panel content. Add course details.</p>
+    <mat-action-row>
+        <button mat-button>Enroll</button>
+    </mat-action-row>
+</mat-expansion-panel>
+</mat-accordion>
+
+<mat-grid-list cols="2"  rowHeight="fit" style="height:200px" gutterSize="10px">
+    <mat-grid-tile colspan="2">Tile 1</mat-grid-tile>
+    <mat-grid-tile rowspan="2" >Tile 2</mat-grid-tile>
+    <mat-grid-tile rowspan="2">Tile 3</mat-grid-tile>
+    <mat-grid-tile>Tile 4</mat-grid-tile>
+</mat-grid-list>
+  
+<mat-list>
+    <mat-list-item>
+        <mat-icon matListIcon class="matlist">home</mat-icon>
+        <h3 mat-line class="matlist">Heading</h3>
+        <p matLine class="matlist">Line</p>
+    </mat-list-item>
+    <mat-divider class="matlist"></mat-divider>   
+       <mat-list-item>
+        <mat-icon matListIcon class="matlist">folder</mat-icon>
+        <h3 mat-line class="matlist">Heading 2</h3>
+        <p matLine class="matlist">Line 2</p>
+    </mat-list-item>
+</mat-list>
+
+<mat-list dense >
+    <mat-list-item class="matlist">Item 1</mat-list-item>
+    <mat-list-item class="matlist">Item 2</mat-list-item>
+    <mat-list-item class="matlist">Item 3</mat-list-item>
+</mat-list>
+
+<mat-nav-list class="matlist">
+    <a class="matlist" mat-list-item href="#">Home</a>
+    <a class="matlist" mat-list-item href="#">About</a>
+    <a class="matlist" mat-list-item href="#">Services</a>
+</mat-nav-list>
+
+<mat-menu #appMenu="matMenu" xPosition="after" yPosition="above">
+    <button mat-menu-item [matMenuTriggerFor]="subMenu">FrontEnd</button>
+    <button mat-menu-item>BackEnd</button>
+</mat-menu>  
+
+<button mat-flat-button [matMenuTriggerFor]="appMenu" class="center">Menu</button>
+
+<mat-menu #subMenu="matMenu">
+    <button mat-menu-item>Angular</button>
+    <button mat-menu-item>React</button>
+    <button mat-menu-item>Vue</button>
+</mat-menu> 
+
+<mat-menu #lazyMenu="matMenu">
+    <ng-template matMenuContent let-name="name" let-hobby="hobby">
+        <button mat-menu-item>settings</button>
+        <button mat-menu-item>Hobby is {{hobby}}</button>
+        <button mat-menu-item>Log out {{name}}</button>
+    </ng-template>
+</mat-menu>
+
+<button mat-flat-button [matMenuTriggerData]="{name: 'Vishwas', hobby: 'football'}" [matMenuTriggerFor]="lazyMenu">Vishwas</button>
+<button mat-flat-button [matMenuTriggerData]="{name: 'CodeEvolution' , hobby: 'teaching'}" [matMenuTriggerFor]="lazyMenu">CodeEvolution</button>
+
 <mat-toolbar color="accent" class="navbar">
     <div>CodeEvolution</div>
-    <div>
+    <div> 
         <span id="navbar1">Home</span>
         <span id="navbar1">About</span>
         <span id="navbar1">Services</span>
@@ -128,3 +358,47 @@
     <h3>This Is Heading for h3</h3>
     <h4>This Is Heading for h4</h4>
 </div>
+<mat-form-field>
+    <input (keyup)="applyFilter($event.target.value)" matInput placeholder="Filter">
+</mat-form-field>
+
+<div matSort class="mat-elevation-z8">
+<mat-table [dataSource]="dataSource" >
+    <!-- Position Column -->
+    <ng-container matColumnDef="position">
+      <mat-header-cell  *matHeaderCellDef mat-sort-header> No. </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.position}} </mat-cell>
+    </ng-container>
+  
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef mat-sort-header > Name </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+    </ng-container>
+    
+    <!-- Weight Column -->
+    <ng-container matColumnDef="weight">
+      <mat-header-cell  *matHeaderCellDef mat-sort-header> Weight </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.weight}} </mat-cell>
+    </ng-container>
+  
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="symbol">
+      <mat-header-cell *matHeaderCellDef> Symbol </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.symbol}} </mat-cell>
+    </ng-container>
+  
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row (click)="logData(row)" *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+
+  <mat-paginator [pageSizeOptions]="[5,10,20]" showFirstLastButtons></mat-paginator>
+</div>
+
+<cdk-virtual-scroll-viewport itemSize="100" class="container">
+    <div *cdkVirtualFor="let number of numbers" class="number">
+        {{number}}
+    </div>
+</cdk-virtual-scroll-viewport>
+
+

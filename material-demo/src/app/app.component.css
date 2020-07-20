@@ -27,3 +27,40 @@ mat-sidenav {
     background-color: lightcoral;
     width: 200px;
 }
+
+.center {
+    margin: 10rem;
+} 
+
+.matlist{
+    color:black;
+}
+
+mat-grid-tile {
+    background-color: lightblue;
+}
+mat-tab-group#group1{
+      color:black;
+
+}
+mat-tab#group2{
+    color:black;
+
+}
+
+table {
+    width: 100%;
+}
+
+.number {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid maroon;
+    box-sizing: border-box;
+    height: 100px;
+}
+
+.container {
+    height: 400px;
+}
