@@ -1,0 +1,39 @@
+mat-toolbar {
+    //display: flex;
+    //justify-content: space-between;
+
+    .posts-btn {
+        margin-right: 1rem;
+    }
+}
+
+.main-area {
+    margin: 4rem;
+}
+
+.div-log{
+    margin-left: 60%;
+
+}
+
+.float-right {
+    float: right;
+}
+
+.m{
+    margin-top: 0.5rem;
+    margin-right: 2rem;
+}
+
+.border {
+    border: 1px solid black;
+}
+
+.hyper-link {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.active-link {
+    background-color: rgba(255, 0, 0, 0.705);
+}

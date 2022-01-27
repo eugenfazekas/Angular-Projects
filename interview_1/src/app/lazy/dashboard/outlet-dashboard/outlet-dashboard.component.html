@@ -1,0 +1,23 @@
+<mat-toolbar color="primary">
+    <div >
+        <button routerLink="/posts" mat-raised-button color="accent" class="posts-btn" (click)="openDialog()">Posts</button>
+        <button routerLink="/dashboard/todos" routerLinkActive="active-link"mat-raised-button color="accent" class="todos-btn" (click)="navigateToTodos()">To Do ({{todo}})</button>
+    </div>
+    <div class="div-log ">
+        <div  class="m float-right">
+            <button (click)="logout()" mat-raised-button>Log Out</button>
+        </div>
+        <div class="m float-right">
+            <h3 class="hyper-link" (click)="goToLink('https://www.google.com')" >{{companyName}}</h3>
+         </div>   
+         <div class="m float-right">
+            <h3 >{{name}}</h3>
+        </div>
+
+    </div>
+</mat-toolbar>
+<div class="main-area">
+    <mat-card class="mat-elevation-z4">
+        <router-outlet></router-outlet>
+    </mat-card>
+</div>
