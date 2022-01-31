@@ -21,7 +21,9 @@ export class OutletDashboardComponent {
     public todo:number = 5;
 
     constructor(public dialog: MatDialog, private store: Store, private router: Router) {
-        this.store.dispatch(new Todo.Initialize()).subscribe();
+        this.getTodosState.subscribe(res => {
+            res.todos.length == 0 ? this.store.dispatch(new Todo.Initialize()).subscribe() : null
+         })
         this.loggedIn.subscribe(res => {
             this.name = res.name;
             this.companyName = res.company.name; 

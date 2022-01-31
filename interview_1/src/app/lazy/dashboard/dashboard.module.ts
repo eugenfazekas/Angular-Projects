@@ -5,6 +5,7 @@ import { DialogElementsExampleDialog, OutletDashboardComponent } from '@lct/lazy
 import { TodoModule } from '@lct/lazy/todo/todo.module';
 import { PostsModule } from '@lct/lazy/posts/posts.module';
 import { MaterialModule } from '@lct/ui/material.module';
+import { AuthGuard } from '@lct/shared/auth.guard';
 
 @NgModule({
     declarations: [
@@ -18,5 +19,8 @@ import { MaterialModule } from '@lct/ui/material.module';
         MaterialModule,
         DashboardRoutingModule
     ],
+    providers: [
+        AuthGuard
+    ]
 })
 export class DashboardModule { }

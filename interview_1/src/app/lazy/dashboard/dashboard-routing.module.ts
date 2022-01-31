@@ -3,6 +3,7 @@ import { Route, RouterModule } from '@angular/router';
 import { OutletDashboardComponent } from '@lct/lazy/dashboard/outlet-dashboard/outlet-dashboard.component';
 import { OutletTodoComponent } from '@lct/lazy/todo/outlet-todo/outlet-todo.component';
 import { OutletPostsComponent } from '@lct/lazy/posts/outlet-posts/outlet-posts.component';
+import { AuthGuard } from '@lct/shared/auth.guard';
 
 const routes: Route[] = [
     {
@@ -11,10 +12,12 @@ const routes: Route[] = [
         children: [
             {
                 path: 'todos',
-                component: OutletTodoComponent
+                component: OutletTodoComponent,
+                canActivate: [AuthGuard]
             }, {
                 path: 'posts',
-                component: OutletPostsComponent
+                component: OutletPostsComponent,
+                canActivate: [AuthGuard]
             }
         ]
     }
