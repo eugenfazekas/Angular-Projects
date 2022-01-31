@@ -1,11 +1,17 @@
-<p>outlet-todo works!</p>
+<button mat-raised-button color="primary" class="float-right m-1" (click)="getIncompletedTodos()" [ngClass]="{'active_button': active_Button == 'incomplete'}">Incomplete</button>
+<button mat-raised-button color="primary" class="float-right m-1" (click)="getTodayCompletedTodos()" [ngClass]="{'active_button': active_Button == 'completed'}">Completed</button>
+<button mat-raised-button color="primary" class="float-right" (click)="getAllTodos()" [ngClass]="{'active_button': active_Button == 'all'}" >All</button>
+<p class="clear"></p>
 
-<!--
-<div class="form-group" *ngFor="let control of formGroup.controls">
-    <label>{{control.label}}</label>
-    <input class="form-control"  formControlName="control" />
-
-    <small *ngIf="formGroup.errors ?.passwordsNotEqual && (control.modelProperty == 'password' || control.modelProperty == 'confirmPassword')" 
-    class="text-danger">Passwords do not match</small>
-</div>
--->
+<form [formGroup]="outletForm.form"> 
+    <div formArrayName="todos">
+      <div *ngFor="let todo of outletForm.todosForm().controls; let i=index">
+        <div [formGroupName]="i">
+          <mat-label class="float-left"> {{todo.value.id}}.</mat-label>
+          <mat-checkbox  #check formControlName="checked" class="float-left m-1" (click)="updateTodoState(todo.value.id)"> </mat-checkbox>
+          <mat-label [ngClass]="{'m-1': 1 > 0, 'float-left':true,'red-text': check.checked === false,'green-text': check.checked === true}"> {{todo.value.title}}.</mat-label>
+          <p class="clear"></p>
+        </div>
+      </div>
+    </div>
+  </form>

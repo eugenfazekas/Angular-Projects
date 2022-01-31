@@ -1,7 +1,6 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UserModel } from '@lct/models/user.model';
 import { User } from '@lct/store/user.actions';
 import { UserState } from '@lct/store/user.state';
 import { Select, Store } from '@ngxs/store';
@@ -14,7 +13,7 @@ import { UserStateModel } from '@lct/store/user.state';
 export class LoginComponent {
 
     @Select(UserState.loggedIn) loggedIn: Observable<UserStateModel>;
-    public loggedErrorMessage: number = 0;
+    loggedError: boolean = false;
 
     public form: FormGroup;
 
@@ -26,10 +25,9 @@ export class LoginComponent {
     public submit(): void {
         if(this.form.valid) {
             this.store.dispatch(new User.LoginState(this.form.value.username)).subscribe();
-            this.loggedErrorMessage = -1;
             this.loggedIn.subscribe(res => {
-                res.id == 1 ? this.router.navigateByUrl('dashboard') : null;
-                this.loggedErrorMessage = 0;
+                res.id == 1 ? this.loggedError = false : this.loggedError = true ;
+                res.id == 1 ? this.router.navigateByUrl('dashboard/todos') : null;       
             })
         }
     }

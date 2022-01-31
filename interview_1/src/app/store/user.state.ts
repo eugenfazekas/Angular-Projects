@@ -3,7 +3,7 @@ import { Action, Selector, State, StateContext } from '@ngxs/store';
 import { UserModel } from '@lct/models/user.model';
 import { User} from '@lct/store/user.actions';
 import { ApiService } from '@lct/api/api.service';
-import { filter, map, tap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 export interface UserStateModel extends UserModel {
     company:{
@@ -35,8 +35,8 @@ export class UserState {
     @Action(User.Initialize)
     public initialize(ctx: UserContext, action: User.Initialize): void {
 
-    } 
-    
+    }
+
     @Action(User.LoginState)
     public loginstate(ctx: UserContext, action: User.LoginState) {
         const state = ctx.getState();
@@ -55,7 +55,7 @@ export class UserState {
                 } 
                          })
                                        ) : null
-        }))
+            }))
     }
 
     @Action(User.LogOut)

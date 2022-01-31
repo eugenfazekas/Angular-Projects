@@ -4,9 +4,8 @@
         <mat-form-field class="example-full-width">
             <mat-label>User name</mat-label>
             <input matInput formControlName="username">
-            <small style="color:red;padding-top: 5px;" *ngIf="loggedErrorMessage == -1">Wrong Username</small>
+            <small style="color:red; padding-top: 5px;" *ngIf="this.loggedError === true">email not found</small>
         </mat-form-field>
-
-        <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid">Log In</button>
+        <button mat-raised-button color="primary" type="submit">Log In</button>
     </form>
 </mat-card>

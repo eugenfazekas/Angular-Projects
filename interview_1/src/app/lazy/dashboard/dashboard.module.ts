@@ -12,11 +12,11 @@ import { MaterialModule } from '@lct/ui/material.module';
         DialogElementsExampleDialog
     ],
     imports: [
-        CommonModule,
-        DashboardRoutingModule,
+        CommonModule, 
         TodoModule,
         PostsModule,
-        MaterialModule
+        MaterialModule,
+        DashboardRoutingModule
     ],
 })
 export class DashboardModule { }
