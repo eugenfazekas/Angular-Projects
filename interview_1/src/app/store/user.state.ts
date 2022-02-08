@@ -31,35 +31,9 @@ type UserContext = StateContext<UserStateModel>;
 export class UserState {
 
     constructor(public apiService: ApiService) {}
-
-    @Action(User.Initialize)
-    public initialize(ctx: UserContext, action: User.Initialize): void {
-
-    }
-
-    @Action(User.LoginState)
-    public loginstate(ctx: UserContext, action: User.LoginState) {
-        const state = ctx.getState();
-        return this.apiService.get<UserStateModel[]>('/users').pipe(map(res => {
-          let user = res.find(res => action.payload == res.email )
-          user != undefined && user.email == action.payload ?  
-           (ctx.setState({
-              ...state,
-              id:1,
-              name: user.name,
-              phone: user.phone,
-              username: user.username,
-              email: user.email,
-              company: {
-                   name:  user.company.name
-                } 
-                         })
-                                       ) : null
-            }))
-    }
-
-    @Action(User.LogOut)
-    public logout(ctx: UserContext, action: User.LogOut): void {
+ 
+    @Action(User.Init)
+    public logout(ctx: UserContext, action: User.Init): void {
         const state = ctx.getState();
         ctx.setState({
             ...state,
@@ -73,6 +47,27 @@ export class UserState {
             }
         })
     } 
+
+    @Action(User.LoginState)
+    public loginstate(ctx: UserContext, action: User.LoginState) {
+        const state = ctx.getState();
+        return this.apiService.get<UserStateModel[]>('/users').pipe(map(res => {
+          let user = res.find(res => action.payload == res.email );
+          user != undefined && user.email == action.payload ?  
+           (ctx.setState({
+              ...state,
+              id:user.id,
+              name: user.name,
+              phone: user.phone,
+              username: user.username,
+              email: user.email,
+              company: {
+                   name:  user.company.name
+                } 
+                         })
+                                       ) : null
+            }))
+    }
  
     @Selector()
     static loggedIn(state: UserStateModel) {

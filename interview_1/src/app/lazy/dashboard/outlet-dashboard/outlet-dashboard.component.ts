@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {MatDialog} from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Todo } from '@lct/store/todo.action';
 import { TodoState, TodoStateModel } from '@lct/store/todo.state';
@@ -19,19 +19,21 @@ export class OutletDashboardComponent {
     public name: string;
     public companyName: string;
     public todo:number = 5;
+    public logged: boolean = false;
 
     constructor(public dialog: MatDialog, private store: Store, private router: Router) {
-        this.getTodosState.subscribe(res => {
-            res.todos.length == 0 ? this.store.dispatch(new Todo.Initialize()).subscribe() : null
-         })
+
         this.loggedIn.subscribe(res => {
             this.name = res.name;
             this.companyName = res.company.name; 
+            res.id > -1 && this.logged == false ? (
+                this.store.dispatch(new Todo.Initialize(res.id)).subscribe(res => {
+                    this.logged = true;
+                    let incomplete_todos = res.todos.todos.filter(filter => filter.completed == false);
+                    this.todo = incomplete_todos.length;     
+                })
+             ) : null;
         })
-        this.getTodosState.subscribe(res => {
-            let incomplete_todos = res.todos.filter( filter => filter.completed == false);
-            this.todo = incomplete_todos.length;
-         })
     }
 
     openDialog() {
@@ -43,7 +45,8 @@ export class OutletDashboardComponent {
     }
 
     logout() {
-        this.store.dispatch(new User.LogOut()).subscribe();
+        this.store.dispatch(new User.Init()).subscribe();
+        this.store.dispatch(new Todo.CleanUpTodos()).subscribe();
         this.router.navigateByUrl('login');
     }
 

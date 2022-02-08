@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { User } from '@lct/store/user.actions';
@@ -19,16 +19,17 @@ export class LoginComponent {
 
     public constructor(private _builder: FormBuilder, private store: Store, private router: Router) {
         this.form = this._builder.group({ 'username': this._builder.control('')
-        });
+        }); 
     }
 
     public submit(): void {
         if(this.form.valid) {
-            this.store.dispatch(new User.LoginState(this.form.value.username)).subscribe();
-            this.loggedIn.subscribe(res => {
-                res.id == 1 ? this.loggedError = false : this.loggedError = true ;
-                res.id == 1 ? this.router.navigateByUrl('dashboard/todos') : null;       
-            })
+            this.store.dispatch(new User.LoginState(this.form.value.username)).subscribe( res => {
+                    res.user.id != -1 ? this.loggedError = false : this.loggedError = true ;
+                    res.user.id != -1 ? this.router.navigateByUrl('dashboard/todos') : null;     
+               }  
+            );
         }
+        this.form.reset();
     }
 }

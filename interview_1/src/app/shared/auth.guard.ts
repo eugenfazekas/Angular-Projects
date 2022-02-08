@@ -16,7 +16,7 @@ export class AuthGuard {
  
     canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         return this.loggedIn.pipe(map(res => {
-            if(res.id == 1) 
+            if(res.id > -1) 
                 return true;
             else {
                 this.router.navigateByUrl('/login')
